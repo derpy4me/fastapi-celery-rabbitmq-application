@@ -1,13 +1,14 @@
+from datetime import datetime
 from celery import group
 from fastapi import APIRouter
 from starlette.responses import JSONResponse
 
 from api import universities
-from celery_tasks.tasks import get_all_universities_task, get_university_task
+from celery_tasks.tasks import get_all_universities_task, get_university_task, send_data_webhook
 from config.celery_utils import get_task_info
 from schemas.schemas import Country
 
-router = APIRouter(prefix='/universities', tags=['University'], responses={404: {"description": "Not found"}})
+router = APIRouter(prefix="/universities", tags=["University"], responses={404: {"description": "Not found"}})
 
 
 @router.post("/")
@@ -58,3 +59,15 @@ async def get_universities_parallel(country: Country) -> dict:
     for result in ret_values:
         data.update(result)
     return data
+
+
+@router.post("/eta")
+async def get_universities__by_eta(country: Country, time: datetime):
+    task = get_all_universities_task.apply_async(args=[country.countries], eta=time)
+    return JSONResponse({"task_id": task.id})
+
+
+@router.post("/send_webhook")
+async def send_data_to_webhook(data_in: dict, send_time: datetime):
+    task = send_data_webhook.apply_async(args=[data_in], eta=send_time)
+    return JSONResponse({"task_id": task.task_id})
