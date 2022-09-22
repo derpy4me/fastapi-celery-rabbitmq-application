@@ -38,7 +38,7 @@ def get_university_task(self, country: str):
     autoretry_for=(Exception,),
     retry_backoff=True,
     retry_kwargs={"max_retries": 5},
-    name="celery:send_data_webhook",
+    name="webhook:send_data_webhook",
 )
 def send_data_webhook(self, data: dict):
     webhook_url = "https://webhook.site/stratatest-dev/celery"
