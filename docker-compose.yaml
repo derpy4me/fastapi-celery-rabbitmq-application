@@ -1,8 +1,9 @@
 version: "3.9"
 
 services:
-    some-rabbit:
-        image: rabbitmq:3-management
-        ports:
-            - 8080:15672
-            - 5672:5672
+  some-rabbit:
+    hostname: "some-rabbit"
+    image: rabbitmq:3-management
+    ports:
+      - 8080:15672
+      - 5672:5672
