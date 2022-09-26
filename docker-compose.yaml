@@ -1,9 +1,18 @@
 version: "3.9"
 
 services:
-  some-rabbit:
-    hostname: "some-rabbit"
-    image: rabbitmq:3-management
-    ports:
-      - 8080:15672
-      - 5672:5672
+    some-rabbit:
+        hostname: "some-rabbit"
+        image: rabbitmq:3-management
+        # ports:
+        #     - 8080:15672
+        #     - 5672:5672
+    fast-rabbit:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        hostname: "fast-rabbit"
+        image: fast-rabbit-celery
+        ports:
+            - 9003:9000
+            - 5556:5556

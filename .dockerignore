@@ -1,0 +1,10 @@
+*.sqlite
+*.pid
+__pycache__
+.idea
+.mypy_cache
+.vscode
+*.png
+license.txt
+*.lock
+README.md
