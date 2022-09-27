@@ -1,6 +1,5 @@
 from typing import List
 import json
-from urllib import request
 from celery import shared_task
 
 from api import universities
