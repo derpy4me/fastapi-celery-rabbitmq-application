@@ -8,6 +8,8 @@ services:
             - 15672:15672
         #     - 5672:5672
     fast-rabbit:
+        depends_on:
+            - some-rabbit
         build:
             context: ./
             dockerfile: Dockerfile

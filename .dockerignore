@@ -8,3 +8,5 @@ __pycache__
 license.txt
 *.lock
 README.md
+docker-compose.yaml
+Dockerfile
