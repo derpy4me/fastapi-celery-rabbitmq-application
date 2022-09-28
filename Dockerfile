@@ -1,7 +1,7 @@
 FROM python:3.10-bullseye
 
 RUN apt update && apt install -y supervisor
-RUN mkdir -p /var/log/supervisor /var/log/celery
+RUN mkdir -p /var/log/supervisor /var/log/celery /var/log/fastapi /db/ /var/log/flower
 
 RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/etc/poetry python3 - && \
     cd /usr/local/bin && \

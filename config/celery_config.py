@@ -12,15 +12,15 @@ def route_task(name, args, kwargs, options, task=None, **kw):
 
 class BaseConfig:
     CELERY_BROKER_URL: str = os.environ.get("CELERY_BROKER_URL", "amqp://guest:guest@localhost:5672//")
-    CELERY_RESULT_BACKEND: str = os.environ.get("CELERY_RESULT_BACKEND", "")
+    CELERY_RESULT_BACKEND: str = "db+" + os.environ.get("DATABASE_URL", "sqlite:////db/celery.sqlite")
 
-    task_track_started: bool = True
-    task_serializer: str = "json"
-    result_serializer: str = "json"
-    accept_content: list[str] = ["json"]
-    result_persistent: bool = True
-    worker_send_task_events: bool = False
-    worker_prefetch_multiplier: int = 1
+    # task_track_started: bool = True
+    # task_serializer: str = "json"
+    # result_serializer: str = "json"
+    # accept_content: list[str] = ["json"]
+    # result_persistent: bool = True
+    # worker_send_task_events: bool = False
+    # worker_prefetch_multiplier: int = 1
 
     CELERY_TASK_QUEUES: tuple = (
         # default queue

@@ -7,6 +7,8 @@ services:
         ports:
             - 15672:15672
         #     - 5672:5672
+        networks:
+            - postgres_default
     fast-rabbit:
         depends_on:
             - some-rabbit
@@ -20,4 +22,14 @@ services:
             - 5556:5556
         environment:
             - CELERY_BROKER_URL=amqp://guest:guest@some-rabbit:5672//
-            - DB_LOCATION=
+            - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/celery
+        volumes:
+            - fast-rabbit:/db
+        networks:
+            - postgres_default
+
+volumes:
+    fast-rabbit:
+networks:
+    postgres_default:
+        external: true
