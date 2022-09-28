@@ -18,7 +18,7 @@ services:
         hostname: "fast-rabbit"
         image: fast-rabbit-celery
         ports:
-            - 9003:9000
+            - 9000:9000
             - 5556:5556
         environment:
             - CELERY_BROKER_URL=amqp://guest:guest@some-rabbit:5672//
